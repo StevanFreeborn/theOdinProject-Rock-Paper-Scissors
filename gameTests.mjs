@@ -130,7 +130,7 @@ const tests = {
   }
 }
 
-function run() {
+function runTests() {
   for (const [testName, test] of Object.entries(tests)) {
     const result = test.call();
 
@@ -142,4 +142,4 @@ function run() {
   }
 }
 
-run();
+runTests();
