@@ -77,11 +77,6 @@ function playRound(
 ) {
   const playerChoiceLowered = playerChoice.toLowerCase();
   const outcome = OUTCOMES[playerChoiceLowered];
-
-  if (!outcome) {
-    return `${playerChoice} is not a valid choice. Please choose Rock, Paper, or Scissors.`;
-  }
-
   const result = outcome[computerChoice];
   return getResultMessage(result, playerChoice, computerChoice);
 }
@@ -92,3 +87,53 @@ export {
   getResultMessage,
   playRound,
 }
+
+/**
+ * Runs 5 rounds of the game, keeps score, and displays the result of each round and of the game.
+ */
+function game() {
+  let playerWins = 0;
+  let computerWins = 0;
+
+  for (const num in [...Array(5).keys()]) {
+    let playerChoice;
+    let outcome;
+
+    do {
+
+      playerChoice = prompt('Rock, Paper, or Scissors?');
+      outcome = OUTCOMES[playerChoice.toLowerCase()];
+
+      if (!outcome) {
+        alert(`${playerChoice} is not a valid choice.`);
+      }
+
+    } while (!outcome)
+
+    const result = playRound(playerChoice, getComputerChoice());
+
+    console.log(result);
+
+    if (result.search(/you win/i)) {
+      playerWins++;
+    }
+
+    if (result.search(/you lose/i)) {
+      computerWins++;
+    }
+  }
+
+  if (computerWins > playerWins) {
+    console.log('You lost and the Computer won.');
+    return;
+  }
+
+  if (playerWins > computerWins) {
+    console.log('You win and the Computer lost.');
+    return;
+  }
+
+  console.log('You tied with the computer');
+}
+
+game();
