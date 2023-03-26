@@ -3,6 +3,7 @@ import {
   capitalize,
   getResultMessage,
   playRound,
+  game
 } from './game.mjs';
 
 const tests = {
@@ -143,3 +144,4 @@ function runTests() {
 }
 
 runTests();
+game();

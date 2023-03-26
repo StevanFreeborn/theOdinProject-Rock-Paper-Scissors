@@ -143,11 +143,10 @@ function game() {
   console.log('You tied with the computer');
 }
 
-game();
-
 export {
   getComputerChoice,
   capitalize,
   getResultMessage,
   playRound,
+  game,
 }
