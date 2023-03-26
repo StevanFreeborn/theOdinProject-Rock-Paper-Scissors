@@ -66,7 +66,7 @@ function getResultMessage(
 }
 
 /**
- * Plays around of rock paper scissors between the player and the computer.
+ * Plays a round of rock paper scissors between the player and the computer.
  * @param {string} playerChoice - The players choice.
  * @param {string} computerChoice - The computers choice.
  * @returns {number} Returns a value indicating whether the player won (1), lost (-1), or tied (0).
