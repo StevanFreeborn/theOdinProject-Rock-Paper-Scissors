@@ -102,6 +102,11 @@ function game() {
     do {
 
       playerChoice = prompt('Rock, Paper, or Scissors?');
+
+      if (!playerChoice) {
+        continue;
+      }
+
       outcome = OUTCOMES[playerChoice.toLowerCase()];
 
       if (!outcome) {
@@ -112,15 +117,16 @@ function game() {
 
     const result = playRound(playerChoice, getComputerChoice());
 
-    console.log(result);
 
-    if (result.search(/you win/i)) {
+    if (result.search('You Win') !== -1) {
       playerWins++;
     }
 
-    if (result.search(/you lose/i)) {
+    if (result.search('You Lose') !== -1) {
       computerWins++;
     }
+
+    console.log(`${result} Score: Player: ${playerWins} Computer: ${computerWins}`);
   }
 
   if (computerWins > playerWins) {
