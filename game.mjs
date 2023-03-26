@@ -92,7 +92,6 @@ function game() {
     let outcome;
 
     do {
-
       playerChoice = prompt('Rock, Paper, or Scissors?');
 
       if (!playerChoice) {
@@ -109,8 +108,10 @@ function game() {
 
     const computerChoice = getComputerChoice();
 
-    const result = playRound(playerChoice, computerChoice);
-
+    const result = playRound(
+      playerChoice,
+      computerChoice
+    );
 
     if (result === 1) {
       playerWins++;
@@ -120,7 +121,11 @@ function game() {
       computerWins++;
     }
 
-    const resultMessage = getResultMessage(result, playerChoice, computerChoice);
+    const resultMessage = getResultMessage(
+      result,
+      playerChoice,
+      computerChoice
+    );
 
     console.log(`${resultMessage} Score: Player: ${playerWins} Computer: ${computerWins}`);
   }

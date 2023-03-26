@@ -8,17 +8,19 @@ import {
 const tests = {
   getComputerChoice_WhenCalled_ItShouldReturnRockPaperOrScissors() {
     const result = getComputerChoice();
-    return result === 'rock' || result === 'paper' || result === 'scissors';
+    return result === 'rock' ||
+    result === 'paper' ||
+    result === 'scissors';
   },
   capitalize_WhenCalled_ItShouldReturnTheWordGivenCapitalized() {
-    const cases = {
+    const testCases = {
       'hello': 'Hello',
       'Hello': 'Hello',
       'heLLO': 'Hello',
       'WoRld': 'World',
     }
 
-    for (const [word, expectedResult] of Object.entries(cases)) {
+    for (const [word, expectedResult] of Object.entries(testCases)) {
       const result = capitalize(word);
 
       if (result !== expectedResult) {
@@ -30,7 +32,7 @@ const tests = {
     return true;
   },
   getResultMessage_WhenCalled_ItShouldReturnProperResultMessage() {
-    const cases = [
+    const testCases = [
       {
         result: 1,
         playerChoice: 'rock',
@@ -51,11 +53,15 @@ const tests = {
       },
     ]
 
-    for (const cs of cases) {
-      const result = getResultMessage(cs.result, cs.playerChoice, cs.computerChoice);
+    for (const testCase of testCases) {
+      const result = getResultMessage(
+        testCase.result,
+        testCase.playerChoice,
+        testCase.computerChoice
+      );
 
-      if (result !== cs.expectedMessage) {
-        console.log(`${result} != ${cs.expectedMessage}`);
+      if (result !== testCase.expectedMessage) {
+        console.log(`${result} != ${testCase.expectedMessage}`);
         return false;
       }
     }
@@ -63,7 +69,7 @@ const tests = {
     return true;
   },
   playRound_WhenCalled_ItShouldReturnProperMessageIndicatingIfPlayerWonOrLost() {
-    const cases = [
+    const testCases = [
       {
         playerChoice: 'rock',
         computerChoice: 'paper',
@@ -111,11 +117,11 @@ const tests = {
       },
     ];
 
-    for (const cs of cases) {
-      const result = playRound(cs.playerChoice, cs.computerChoice);
+    for (const testCase of testCases) {
+      const result = playRound(testCase.playerChoice, testCase.computerChoice);
 
-      if (result !== cs.expectedResult) {
-        console.log(`${result} != ${cs.expectedResult}`);
+      if (result !== testCase.expectedResult) {
+        console.log(`${result} != ${testCase.expectedResult}`);
         return false;
       }
     }
