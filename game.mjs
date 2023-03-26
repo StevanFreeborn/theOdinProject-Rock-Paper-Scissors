@@ -69,7 +69,7 @@ function getResultMessage(
  * Plays around of rock paper scissors between the player and the computer.
  * @param {string} playerChoice - The players choice.
  * @param {string} computerChoice - The computers choice.
- * @returns {string} Returns a message indicating whether the player or computer won the round.
+ * @returns {number} Returns a value indicating whether the player won (1), lost (-1), or tied (0).
  */
 function playRound(
   playerChoice,
@@ -77,8 +77,7 @@ function playRound(
 ) {
   const playerChoiceLowered = playerChoice.toLowerCase();
   const outcome = OUTCOMES[playerChoiceLowered];
-  const result = outcome[computerChoice];
-  return getResultMessage(result, playerChoice, computerChoice);
+  return outcome[computerChoice];
 }
 
 export {
@@ -115,18 +114,22 @@ function game() {
 
     } while (!outcome)
 
-    const result = playRound(playerChoice, getComputerChoice());
+    const computerChoice = getComputerChoice();
+
+    const result = playRound(playerChoice, computerChoice);
 
 
-    if (result.search('You Win') !== -1) {
+    if (result === 1) {
       playerWins++;
     }
 
-    if (result.search('You Lose') !== -1) {
+    if (result === -1) {
       computerWins++;
     }
 
-    console.log(`${result} Score: Player: ${playerWins} Computer: ${computerWins}`);
+    const resultMessage = getResultMessage(result, playerChoice, computerChoice);
+
+    console.log(`${resultMessage} Score: Player: ${playerWins} Computer: ${computerWins}`);
   }
 
   if (computerWins > playerWins) {

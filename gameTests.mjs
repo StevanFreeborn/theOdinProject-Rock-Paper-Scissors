@@ -67,47 +67,47 @@ const tests = {
       {
         playerChoice: 'rock',
         computerChoice: 'paper',
-        expectedResult: 'You Lose! Paper beats Rock',
+        expectedResult: -1,
       },
       {
         playerChoice: 'rock',
         computerChoice: 'scissors',
-        expectedResult: 'You Win! Rock beats Scissors',
+        expectedResult: 1,
       },
       {
         playerChoice: 'rock',
         computerChoice: 'rock',
-        expectedResult: 'You Tie! Rock ties Rock',
+        expectedResult: 0,
       },
       {
         playerChoice: 'paper',
         computerChoice: 'paper',
-        expectedResult: 'You Tie! Paper ties Paper',
+        expectedResult: 0,
       },
       {
         playerChoice: 'paper',
         computerChoice: 'scissors',
-        expectedResult: 'You Lose! Scissors beats Paper',
+        expectedResult: -1,
       },
       {
         playerChoice: 'paper',
         computerChoice: 'rock',
-        expectedResult: 'You Win! Paper beats Rock',
+        expectedResult: 1,
       },
       {
         playerChoice: 'scissors',
         computerChoice: 'paper',
-        expectedResult: 'You Win! Scissors beats Paper',
+        expectedResult: 1,
       },
       {
         playerChoice: 'scissors',
         computerChoice: 'scissors',
-        expectedResult: 'You Tie! Scissors ties Scissors',
+        expectedResult: 0,
       },
       {
         playerChoice: 'scissors',
         computerChoice: 'rock',
-        expectedResult: 'You Lose! Rock beats Scissors',
+        expectedResult: -1,
       },
     ];
 
@@ -124,12 +124,16 @@ const tests = {
   }
 }
 
-for (const [testName, test] of Object.entries(tests)) {
-  const result = test.call();
+function run() {
+  for (const [testName, test] of Object.entries(tests)) {
+    const result = test.call();
 
-  if (!result) {
-    console.log(`${testName} - Failed ❌`);
-  } else {
-    console.log(`${testName} - Passed ✅`);
+    if (!result) {
+      console.log(`${testName} - Failed ❌`);
+    } else {
+      console.log(`${testName} - Passed ✅`);
+    }
   }
 }
+
+run();
