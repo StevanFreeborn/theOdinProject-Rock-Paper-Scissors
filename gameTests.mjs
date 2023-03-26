@@ -67,47 +67,47 @@ const tests = {
       {
         playerChoice: 'rock',
         computerChoice: 'paper',
-        expectedResult: '',
+        expectedResult: 'You Lose! Paper beats Rock',
       },
       {
         playerChoice: 'rock',
         computerChoice: 'scissors',
-        expectedResult: '',
+        expectedResult: 'You Win! Rock beats Scissors',
       },
       {
         playerChoice: 'rock',
         computerChoice: 'rock',
-        expectedResult: '',
+        expectedResult: 'You Tie! Rock ties Rock',
       },
       {
         playerChoice: 'paper',
         computerChoice: 'paper',
-        expectedResult: '',
+        expectedResult: 'You Tie! Paper ties Paper',
       },
       {
         playerChoice: 'paper',
         computerChoice: 'scissors',
-        expectedResult: '',
+        expectedResult: 'You Lose! Scissors beats Paper',
       },
       {
         playerChoice: 'paper',
         computerChoice: 'rock',
-        expectedResult: '',
+        expectedResult: 'You Win! Paper beats Rock',
       },
       {
         playerChoice: 'scissors',
         computerChoice: 'paper',
-        expectedResult: '',
+        expectedResult: 'You Win! Scissors beats Paper',
       },
       {
         playerChoice: 'scissors',
         computerChoice: 'scissors',
-        expectedResult: '',
+        expectedResult: 'You Tie! Scissors ties Scissors',
       },
       {
         playerChoice: 'scissors',
         computerChoice: 'rock',
-        expectedResult: '',
+        expectedResult: 'You Lose! Rock beats Scissors',
       },
     ];
 
@@ -119,15 +119,17 @@ const tests = {
         return false;
       }
     }
+
+    return true;
   }
 }
 
-for (const [fnName, fn] of Object.entries(tests)) {
-  const result = fn.call();
+for (const [testName, test] of Object.entries(tests)) {
+  const result = test.call();
 
   if (!result) {
-    console.log(`${fnName} failed ❌`);
+    console.log(`${testName} - Failed ❌`);
   } else {
-    console.log(`${fnName} passed ✅`);
+    console.log(`${testName} - Passed ✅`);
   }
 }
