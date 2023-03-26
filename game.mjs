@@ -80,13 +80,6 @@ function playRound(
   return outcome[computerChoice];
 }
 
-export {
-  getComputerChoice,
-  capitalize,
-  getResultMessage,
-  playRound,
-}
-
 /**
  * Runs 5 rounds of the game, keeps score, and displays the result of each round and of the game.
  */
@@ -146,3 +139,10 @@ function game() {
 }
 
 game();
+
+export {
+  getComputerChoice,
+  capitalize,
+  getResultMessage,
+  playRound,
+}
