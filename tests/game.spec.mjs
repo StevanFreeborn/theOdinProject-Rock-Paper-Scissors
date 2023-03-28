@@ -1,32 +1,29 @@
 import {
-  getComputerChoice,
   capitalize,
+  getComputerChoice,
   getResultMessage,
   playRound,
-  game
-} from './game.mjs';
+} from "./game.mjs";
 
 const tests = {
   getComputerChoice_WhenCalled_ItShouldReturnRockPaperOrScissors() {
     const result = getComputerChoice();
-    return result === 'rock' ||
-    result === 'paper' ||
-    result === 'scissors';
+    return result === "rock" || result === "paper" || result === "scissors";
   },
   capitalize_WhenCalled_ItShouldReturnTheWordGivenCapitalized() {
     const testCases = {
-      'hello': 'Hello',
-      'Hello': 'Hello',
-      'heLLO': 'Hello',
-      'WoRld': 'World',
-    }
+      hello: "Hello",
+      Hello: "Hello",
+      heLLO: "Hello",
+      WoRld: "World",
+    };
 
     for (const [word, expectedResult] of Object.entries(testCases)) {
       const result = capitalize(word);
 
       if (result !== expectedResult) {
-        console.log(`${result} != ${expectedResult}`)
-        return false
+        console.log(`${result} != ${expectedResult}`);
+        return false;
       }
     }
 
@@ -36,23 +33,23 @@ const tests = {
     const testCases = [
       {
         result: 1,
-        playerChoice: 'rock',
-        computerChoice: 'scissors',
-        expectedMessage: 'You Win! Rock beats Scissors',
+        playerChoice: "rock",
+        computerChoice: "scissors",
+        expectedMessage: "You Win! Rock beats Scissors",
       },
       {
         result: 0,
-        playerChoice: 'rock',
-        computerChoice: 'rock',
-        expectedMessage: 'You Tie! Rock ties Rock',
+        playerChoice: "rock",
+        computerChoice: "rock",
+        expectedMessage: "You Tie! Rock ties Rock",
       },
       {
         result: -1,
-        playerChoice: 'paper',
-        computerChoice: 'scissors',
-        expectedMessage: 'You Lose! Scissors beats Paper',
+        playerChoice: "paper",
+        computerChoice: "scissors",
+        expectedMessage: "You Lose! Scissors beats Paper",
       },
-    ]
+    ];
 
     for (const testCase of testCases) {
       const result = getResultMessage(
@@ -72,48 +69,48 @@ const tests = {
   playRound_WhenCalled_ItShouldReturnProperMessageIndicatingIfPlayerWonOrLost() {
     const testCases = [
       {
-        playerChoice: 'rock',
-        computerChoice: 'paper',
+        playerChoice: "rock",
+        computerChoice: "paper",
         expectedResult: -1,
       },
       {
-        playerChoice: 'rock',
-        computerChoice: 'scissors',
+        playerChoice: "rock",
+        computerChoice: "scissors",
         expectedResult: 1,
       },
       {
-        playerChoice: 'rock',
-        computerChoice: 'rock',
+        playerChoice: "rock",
+        computerChoice: "rock",
         expectedResult: 0,
       },
       {
-        playerChoice: 'paper',
-        computerChoice: 'paper',
+        playerChoice: "paper",
+        computerChoice: "paper",
         expectedResult: 0,
       },
       {
-        playerChoice: 'paper',
-        computerChoice: 'scissors',
+        playerChoice: "paper",
+        computerChoice: "scissors",
         expectedResult: -1,
       },
       {
-        playerChoice: 'paper',
-        computerChoice: 'rock',
+        playerChoice: "paper",
+        computerChoice: "rock",
         expectedResult: 1,
       },
       {
-        playerChoice: 'scissors',
-        computerChoice: 'paper',
+        playerChoice: "scissors",
+        computerChoice: "paper",
         expectedResult: 1,
       },
       {
-        playerChoice: 'scissors',
-        computerChoice: 'scissors',
+        playerChoice: "scissors",
+        computerChoice: "scissors",
         expectedResult: 0,
       },
       {
-        playerChoice: 'scissors',
-        computerChoice: 'rock',
+        playerChoice: "scissors",
+        computerChoice: "rock",
         expectedResult: -1,
       },
     ];
@@ -128,8 +125,8 @@ const tests = {
     }
 
     return true;
-  }
-}
+  },
+};
 
 function runTests() {
   for (const [testName, test] of Object.entries(tests)) {
@@ -144,4 +141,3 @@ function runTests() {
 }
 
 runTests();
-game();
