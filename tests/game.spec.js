@@ -1,28 +1,13 @@
 import {
-  capitalize,
   getComputerChoice,
   getResultMessage,
   playRound,
-} from '../scripts/game.mjs';
+} from '../scripts/game.js';
 
 describe('game', () => {
   test('getComputerChoice_WhenCalled_ItShouldReturnRockPaperOrScissors', () => {
     const result = getComputerChoice();
     expect(['rock', 'paper', 'scissors'].includes(result)).toBe(true);
-  });
-
-  test('capitalize_WhenCalled_ItShouldReturnTheWordGivenCapitalized', () => {
-    const testCases = {
-      hello: 'Hello',
-      Hello: 'Hello',
-      heLLO: 'Hello',
-      WoRld: 'World',
-    };
-
-    for (const [word, expectedResult] of Object.entries(testCases)) {
-      const result = capitalize(word);
-      expect(result).toBe(expectedResult);
-    }
   });
 
   test('getResultMessage_WhenCalled_ItShouldReturnProperResultMessage', () => {
