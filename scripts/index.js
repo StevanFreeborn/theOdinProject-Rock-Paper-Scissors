@@ -8,21 +8,25 @@ import { capitalize } from './utils.js';
 
 /**
  * @typedef {Object} State
- * @property {HTMLElement} buttons - The buttons container.
- * @property {HTMLElement} playerScore - The player's score.
- * @property {HTMLElement} computerScore - The computer's score.
- * @property {HTMLElement} result - The result container.
+ * @property {function} buttons - Returns the buttons container.
+ * @property {function} playerScore - Returns the player score element.
+ * @property {function} computerScore - Returns the computer score element.
+ * @property {function} result - Returns the result element.
  */
 const state = {
-  buttons: document.querySelector('#buttons-container'),
-  playerScore: document.querySelector('#player-score'),
-  computerScore: document.querySelector('#computer-score'),
-  result: document.querySelector('#result'),
+  buttons: () =>
+    document.querySelector('#buttons-container'),
+  playerScore: () =>
+    document.querySelector('#player-score'),
+  computerScore: () =>
+    document.querySelector('#computer-score'),
+  result: () => document.querySelector('#result'),
 };
 
-window.addEventListener('DOMContentLoaded', () => {
-  addChoiceButtons();
-});
+window.addEventListener(
+  'DOMContentLoaded',
+  addChoiceButtons
+);
 
 /**
  * Adds buttons for each choice.
@@ -44,7 +48,7 @@ function addChoiceButton(choice) {
   button.setAttribute('data-choice', choice);
   button.addEventListener('click', playGame);
   button.textContent = capitalize(choice);
-  state.buttons.appendChild(button);
+  state.buttons().appendChild(button);
 }
 
 /**
@@ -92,8 +96,8 @@ function updateScore(result) {
  * @returns {void}
  */
 function updatePlayerScore() {
-  state.playerScore.textContent =
-    parseInt(state.playerScore.textContent) + 1;
+  state.playerScore().textContent =
+    parseInt(state.playerScore().textContent) + 1;
 }
 
 /**
@@ -101,8 +105,8 @@ function updatePlayerScore() {
  * @returns {void}
  */
 function updateComputerScore() {
-  state.computerScore.textContent =
-    parseInt(state.computerScore.textContent) + 1;
+  state.computerScore().textContent =
+    parseInt(state.computerScore().textContent) + 1;
 }
 
 /**
@@ -110,8 +114,8 @@ function updateComputerScore() {
  * @returns {number} 1 if the player wins, -1 if the computer wins, 0 if there is no winner.
  */
 function checkForWinner() {
-  const playerScore = state.playerScore.textContent;
-  const computerScore = state.computerScore.textContent;
+  const playerScore = state.playerScore().textContent;
+  const computerScore = state.computerScore().textContent;
 
   if (parseInt(playerScore) === 5) {
     return 1;
@@ -141,7 +145,8 @@ function displayRoundWinner(
     playerChoice,
     computerChoice
   );
-  state.result.textContent = message;
+
+  state.result().textContent = message;
 }
 
 /**
@@ -151,11 +156,11 @@ function displayRoundWinner(
  */
 function displayGameWinner(winner) {
   if (winner === 1) {
-    state.result.textContent = 'You Win!';
+    state.result().textContent = 'You Win!';
     return;
   }
 
-  state.result.textContent = 'The Computer Wins!';
+  state.result().textContent = 'The Computer Wins!';
 }
 
 /**
@@ -163,7 +168,7 @@ function displayGameWinner(winner) {
  * @returns {void}
  */
 function removeButtons() {
-  state.buttons.innerHTML = '';
+  state.buttons().innerHTML = '';
 }
 
 /**
@@ -171,9 +176,9 @@ function removeButtons() {
  * @returns {void}
  */
 function resetGame() {
-  state.playerScore.textContent = 0;
-  state.computerScore.textContent = 0;
-  state.result.textContent = '';
+  state.playerScore().textContent = 0;
+  state.computerScore().textContent = 0;
+  state.result().textContent = '';
   removeButtons();
   addChoiceButtons();
 }
@@ -186,5 +191,21 @@ function addPlayAgain() {
   const resetButton = document.createElement('button');
   resetButton.textContent = 'Play Again';
   resetButton.addEventListener('click', resetGame);
-  state.buttons.appendChild(resetButton);
+  state.buttons().appendChild(resetButton);
 }
+
+export {
+  addChoiceButton,
+  addChoiceButtons,
+  addPlayAgain,
+  checkForWinner,
+  displayGameWinner,
+  displayRoundWinner,
+  playGame,
+  removeButtons,
+  resetGame,
+  state,
+  updateComputerScore,
+  updatePlayerScore,
+  updateScore,
+};
