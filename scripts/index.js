@@ -86,9 +86,15 @@ function playGame(e) {
  * @returns {void}
  */
 function updateScore(result) {
-  result === 1
-    ? updatePlayerScore()
-    : updateComputerScore();
+  if (result === 1) {
+    updatePlayerScore();
+    return;
+  }
+
+  if (result === -1) {
+    updateComputerScore();
+    return;
+  }
 }
 
 /**

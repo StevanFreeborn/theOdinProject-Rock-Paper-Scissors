@@ -7,7 +7,12 @@ import {
   checkForWinner,
   displayGameWinner,
   displayRoundWinner,
+  removeButtons,
+  resetGame,
   state,
+  updateComputerScore,
+  updatePlayerScore,
+  updateScore,
 } from '../scripts/index.js';
 
 describe('index', () => {
@@ -211,6 +216,60 @@ describe('index', () => {
       expect(
         document.getElementById('result').textContent
       ).toBe('You Tie! Rock ties Rock');
+    });
+  });
+
+  describe('playGame', () => {});
+
+  describe('removeButtons', () => {
+    it('should remove buttons from buttons container', () => {
+      addChoiceButtons();
+      removeButtons();
+      expect(state.buttons().innerHTML).toBe('');
+    });
+  });
+
+  describe('resetGame', () => {
+    it('should reset game state', () => {
+      resetGame();
+      expect(state.playerScore().textContent).toBe('0');
+      expect(state.computerScore().textContent).toBe('0');
+      expect(state.result().textContent).toBe('');
+      expect(state.buttons().innerHTML).not.toBe('');
+    });
+  });
+
+  describe('updateComputerScore', () => {
+    it('should increment computer score', () => {
+      updateComputerScore();
+      expect(state.computerScore().textContent).toBe('1');
+    });
+  });
+
+  describe('updatePlayerScore', () => {
+    it('should increment player score', () => {
+      updatePlayerScore();
+      expect(state.playerScore().textContent).toBe('1');
+    });
+  });
+
+  describe('updateScore', () => {
+    it('should increment player score when player wins', () => {
+      updateScore(1);
+      expect(state.playerScore().textContent).toBe('1');
+      expect(state.computerScore().textContent).toBe('0');
+    });
+
+    it('should increment computer score when computer wins', () => {
+      updateScore(-1);
+      expect(state.computerScore().textContent).toBe('1');
+      expect(state.playerScore().textContent).toBe('0');
+    });
+
+    it('should not increment score when it is a tie', () => {
+      updateScore(0);
+      expect(state.playerScore().textContent).toBe('0');
+      expect(state.computerScore().textContent).toBe('0');
     });
   });
 });
