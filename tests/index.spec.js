@@ -7,6 +7,7 @@ import {
   checkForWinner,
   displayGameWinner,
   displayRoundWinner,
+  playGame,
   removeButtons,
   resetGame,
   state,
@@ -219,8 +220,6 @@ describe('index', () => {
     });
   });
 
-  describe('playGame', () => {});
-
   describe('removeButtons', () => {
     it('should remove buttons from buttons container', () => {
       addChoiceButtons();
@@ -270,6 +269,36 @@ describe('index', () => {
       updateScore(0);
       expect(state.playerScore().textContent).toBe('0');
       expect(state.computerScore().textContent).toBe('0');
+    });
+  });
+
+  describe('playGame', () => {
+    it('should be called if player clicks on a button', () => {
+      addChoiceButtons();
+      const buttons = state.buttons();
+      const buttonsArray = [
+        ...buttons.querySelectorAll('button'),
+      ];
+      const button = buttonsArray[0];
+      button.click();
+      expect(state.result().textContent).not.toBe('');
+    });
+
+    it('should play round and display result of the round if no winner', () => {
+      const playerChoice = 'rock';
+      const computerChoice = 'scissors';
+      playGame(playerChoice, computerChoice);
+      expect(state.result().textContent).toBe(
+        'You Win! Rock beats Scissors'
+      );
+    });
+
+    it('should play round and display game winner if someone wins', () => {
+      const playerChoice = 'rock';
+      const computerChoice = 'scissors';
+      state.playerScore().textContent = '4';
+      playGame(playerChoice, computerChoice);
+      expect(state.result().textContent).toBe('You Win!');
     });
   });
 });

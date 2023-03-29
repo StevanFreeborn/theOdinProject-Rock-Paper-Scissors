@@ -46,20 +46,23 @@ function addChoiceButtons() {
 function addChoiceButton(choice) {
   const button = document.createElement('button');
   button.setAttribute('data-choice', choice);
-  button.addEventListener('click', playGame);
+  button.addEventListener('click', e =>
+    playGame(e.target.dataset.choice, getComputerChoice())
+  );
   button.textContent = capitalize(choice);
   state.buttons().appendChild(button);
 }
 
 /**
  * Plays a round of Rock, Paper, Scissors.
- * @param {event} e - The event object.
+ * @param {string} playerChoice - The player's choice.
+ * @param {string} computerChoice - The computer's choice.
  * @returns {void}
  */
-function playGame(e) {
+function playGame(playerChoice, computerChoice) {
   const roundResult = playRound(
-    e.target.dataset.choice,
-    getComputerChoice()
+    playerChoice,
+    computerChoice
   );
 
   updateScore(roundResult);
@@ -69,8 +72,8 @@ function playGame(e) {
   if (gameResult === 0) {
     displayRoundWinner(
       roundResult,
-      e.target.dataset.choice,
-      getComputerChoice()
+      playerChoice,
+      computerChoice
     );
     return;
   }
