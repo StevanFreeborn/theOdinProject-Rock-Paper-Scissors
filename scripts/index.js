@@ -45,6 +45,7 @@ function addChoiceButtons() {
  */
 function addChoiceButton(choice) {
   const button = document.createElement('button');
+  button.classList.add('button');
   button.setAttribute('data-choice', choice);
   button.addEventListener('click', e =>
     playGame(e.target.dataset.choice, getComputerChoice())
@@ -187,7 +188,7 @@ function removeButtons() {
 function resetGame() {
   state.playerScore().textContent = 0;
   state.computerScore().textContent = 0;
-  state.result().textContent = '';
+  state.result().innerHTML = '&nbsp;';
   removeButtons();
   addChoiceButtons();
 }
@@ -198,6 +199,7 @@ function resetGame() {
  */
 function addPlayAgain() {
   const resetButton = document.createElement('button');
+  resetButton.classList.add('button');
   resetButton.textContent = 'Play Again';
   resetButton.addEventListener('click', resetGame);
   state.buttons().appendChild(resetButton);

@@ -61,7 +61,7 @@ describe('index', () => {
         const result = state.result();
         expect(result).toBeInstanceOf(HTMLElement);
         expect(result.id).toBe('result');
-        expect(result.textContent).toBe('');
+        expect(result.innerHTML).toBe('&nbsp;');
       });
     });
 
@@ -233,7 +233,7 @@ describe('index', () => {
       resetGame();
       expect(state.playerScore().textContent).toBe('0');
       expect(state.computerScore().textContent).toBe('0');
-      expect(state.result().textContent).toBe('');
+      expect(state.result().innerHTML).toBe('&nbsp;');
       expect(state.buttons().innerHTML).not.toBe('');
     });
   });
